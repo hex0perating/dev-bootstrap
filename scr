@@ -1,19 +1,19 @@
 #!/bin/bash
 
-VERSION=0.1.0
+VERSION=0.1.1
 
 if [ -z "$1" ]; then
-    echo "scr Version $VERSION"
-    echo "Usage: vscr <file> [local,global,super] [a,u,g,o]"
+    echo "scr version $VERSION"
+    echo "Usage: scr <file> [local,global,super] [a,u,g,o]"
     exit 1
-fi 
+fi
 
 if [ "$2" == "" ]; then
         if [ -z ${EDITOR+x} ]; then
             if [ -f ~/bin/$1 ]; then
                 vim -c "set syntax=sh" -c "startinsert" ~/bin/$1
             elif [ -f /usr/local/bin/$1 ]; then
-                sudo vim -c "set syntax=sh" -c "startinsert" /usr/local/bin/$1
+                sudo vim -c "set syntax=sh" -c "startinsert" /usr/local/bin/$1 
             elif [ -f /usr/local/sbin/$1 ]; then
                 sudo vim -c "set syntax=sh" -c "startinsert" /usr/local/sbin/$1
             else
@@ -25,7 +25,7 @@ if [ "$2" == "" ]; then
                 echo "local - local user scripts"
                 exit 1
             fi
-        else 
+        else
             if [ -f ~/bin/$1 ]; then
                 $EDITOR ~/bin/$1
             elif [ -f /usr/local/bin/$1 ]; then
@@ -47,7 +47,7 @@ fi
 if [ "$2" == "local" ]; then
         if [ -z ${EDITOR+x} ]; then
             vim -c "set syntax=sh" -c "startinsert" ~/bin/$1
-        else 
+        else
             $EDITOR ~/bin/$1
         fi
         chmod $3+x ~/bin/$1
@@ -56,7 +56,7 @@ fi
 if [ "$2" == "global" ]; then
         if [ -z ${EDITOR+x} ]; then
             sudo vim -c "set syntax=sh" -c "startinsert" /usr/local/bin/$1
-        else 
+        else
             sudo $EDITOR /usr/local/bin/$1
         fi
         sudo chmod $3+x /usr/local/bin/$1
@@ -65,7 +65,7 @@ fi
 if [ "$2" == "super" ]; then
         if [ -z ${EDITOR+x} ]; then
             sudo vim -c "set syntax=sh" -c "startinsert" /usr/local/sbin/$1
-        else 
+        else
             sudo $EDITOR /usr/local/sbin/$1
         fi
         sudo chmod $3+x /usr/local/sbin/$1
